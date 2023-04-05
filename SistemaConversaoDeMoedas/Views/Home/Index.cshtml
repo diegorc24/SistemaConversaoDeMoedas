@@ -1,0 +1,47 @@
+﻿@model ConversaoMoedaModel
+
+<h2>Conversao de Moedas</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="from">De:</label>
+        @Html.DropDownListFor(model => model.De, new List<SelectListItem>
+            {
+                new SelectListItem { Text = "USD", Value = "USD" },
+                new SelectListItem { Text = "BRL", Value = "BRL" },
+                new SelectListItem { Text = "EUR", Value = "EUR" },
+                new SelectListItem { Text = "ARS", Value = "ARS" }
+            }, "Selecione...", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.De)
+    </div>
+
+    <div class="form-group">
+        <label for="from">Para:</label>
+         @Html.DropDownListFor(model => model.Para, new List<SelectListItem>
+               {
+                 new SelectListItem { Text = "USD", Value = "USD" },
+                 new SelectListItem { Text = "BRL", Value = "BRL" },
+                 new SelectListItem { Text = "EUR", Value = "EUR" },
+                 new SelectListItem { Text = "ARS", Value = "ARS" }
+               }, "Selecione...", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Para)
+    </div>
+
+    <div class="form-group">
+        <label for="valor">Valor:</label>
+        <input type="number" step="0.01" min="0" name="Valor" placeholder="Exemplo: 100" required>
+        <span class="error">@Html.ValidationMessageFor(model => model.Valor)</span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Converter</button>
+}
+
+@if (ViewBag.Mensagem != null)
+{
+    <p>@ViewBag.Mensagem</p>
+}
+
